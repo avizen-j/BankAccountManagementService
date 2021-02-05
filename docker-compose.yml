@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  app:
+    image: 'bank-account-management:latest'
+    container_name: bank-account-management-app
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+    depends_on:
+      - postgres-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/BankManagementServiceDB
+      - SPRING_DATASOURCE_USERNAME=pguser
+      - SPRING_DATASOURCE_PASSWORD=9E2dc34A2
+      - SPRING_JPA_HIBERNATE_DDL-AUTO=update
+      - SPRING_JPA_SHOW-SQL=true
+      - SPRING_JPA_OPEN-IN-VIEW=false
+      - SPRING_JPA_GENERATE-DDL=true
+  postgres-db:
+    image: "postgres:10-alpine"
+    container_name: postgres-docker
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=9E2dc34A2
+      - POSTGRES_DB=BankManagementServiceDB
+    volumes:
+      - "db-volume:/var/lib/postgresql/data"
+    restart: always
+
+volumes:
+  db-volume:

@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/BankManagementServiceDB
+    username: pguser
+    password: 9E2dc34A2
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show_sql: true
+    open-in-view: false
+    generate-ddl: true

@@ -18,6 +18,9 @@ services:
       - SPRING_JPA_SHOW-SQL=true
       - SPRING_JPA_OPEN-IN-VIEW=false
       - SPRING_JPA_GENERATE-DDL=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_GENERATE_STATISTIC=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_ORDER_INSERTS=true
+      - SPRING_JPA_PROPERTIES_HIBERNATE_JDBC_BATCH_SIZE=30
   postgres-db:
     image: "postgres:10-alpine"
     container_name: postgres-docker

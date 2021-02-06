@@ -10,3 +10,9 @@ spring:
     show_sql: true
     open-in-view: false
     generate-ddl: true
+    properties:
+      hibernate:
+        generate_statistics: true
+        order_inserts: true
+        jdbc:
+          batch_size: 30

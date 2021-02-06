@@ -1,8 +1,10 @@
 package lt.avizen.bankaccountmanagement.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -12,13 +14,14 @@ import java.util.Date;
 @Entity
 @Table(name = "bankStatements")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class BankStatement {
 
     @Id
     @Column
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column
@@ -43,13 +46,4 @@ public class BankStatement {
     @Column
     @NotEmpty
     private String currency;
-
-    public BankStatement(String accountNumber, Date operationDate, String beneficiary, String comment, Double amount, String currency) {
-        this.accountNumber = accountNumber;
-        this.operationDate = operationDate;
-        this.beneficiary = beneficiary;
-        this.comment = comment;
-        this.amount = amount;
-        this.currency = currency;
-    }
 }

@@ -53,7 +53,16 @@ public class CsvServiceImpl implements CsvService {
                 String comment = record.get(BankStatementEnum.comment);
                 Double amount = SafeStringParser.parseDouble(record.get(BankStatementEnum.amount));
                 String currency = record.get(BankStatementEnum.currency);
-                bankStatements.add(new BankStatement(accountNumber, operationDate, beneficiary, comment, amount, currency));
+
+                bankStatements.add(
+                        BankStatement.builder()
+                                .accountNumber(accountNumber)
+                                .operationDate(operationDate)
+                                .beneficiary(beneficiary)
+                                .comment(comment)
+                                .amount(amount)
+                                .currency(currency)
+                                .build());
             }
 
             return bankStatements;

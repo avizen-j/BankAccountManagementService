@@ -6,11 +6,12 @@ import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 
 public final class SafeStringParser {
-    
+
     /// TODO: Support more formats or change the approach.
     public static Date parseDate(String stringDate) {
         try {
@@ -23,6 +24,15 @@ public final class SafeStringParser {
             } catch (DateTimeParseException ex) {
                 return null;
             }
+        }
+    }
+
+    public static LocalDateTime parseDateTime(String stringDate) {
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            return LocalDateTime.parse(stringDate, formatter);
+        } catch (DateTimeParseException ex) {
+            return null;
         }
     }
 

@@ -10,8 +10,8 @@ import org.apache.commons.csv.CSVRecord;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,7 +21,6 @@ public class CsvServiceImpl implements CsvService {
 
     @Override
     public byte[] writeItemsToCsv(List<BankStatement> items) throws IOException {
-
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         OutputStreamWriter writer = new OutputStreamWriter(output);
         CSVPrinter csvPrinter = new CSVPrinter(writer, CSV_FORMAT);
@@ -39,7 +38,6 @@ public class CsvServiceImpl implements CsvService {
 
     @Override
     public List<BankStatement> readCsvToItems(byte[] csvByteArr) throws IOException {
-
         List<BankStatement> bankStatements = new ArrayList<>();
         ByteArrayInputStream input = new ByteArrayInputStream(csvByteArr);
         InputStreamReader reader = new InputStreamReader(input);
@@ -47,25 +45,29 @@ public class CsvServiceImpl implements CsvService {
 
         try (input; reader; csvParser) {
             for (CSVRecord record : csvParser) {
-                String accountNumber = record.get(BankStatementEnum.accountNumber);
-                Date operationDate = SafeStringParser.parseDate(record.get(BankStatementEnum.operationDate));
-                String beneficiary = record.get(BankStatementEnum.beneficiary);
-                String comment = record.get(BankStatementEnum.comment);
-                Double amount = SafeStringParser.parseDouble(record.get(BankStatementEnum.amount));
-                String currency = record.get(BankStatementEnum.currency);
-
-                bankStatements.add(
-                        BankStatement.builder()
-                                .accountNumber(accountNumber)
-                                .operationDate(operationDate)
-                                .beneficiary(beneficiary)
-                                .comment(comment)
-                                .amount(amount)
-                                .currency(currency)
-                                .build());
+                BankStatement bs = toBankStatement(record);
+                bankStatements.add(bs);
             }
-
             return bankStatements;
         }
     }
+
+    private BankStatement toBankStatement(CSVRecord record) {
+        String accountNumber = record.get(BankStatementEnum.accountNumber);
+        LocalDateTime operationDate = SafeStringParser.parseDateTime(record.get(BankStatementEnum.operationDate));
+        String beneficiary = record.get(BankStatementEnum.beneficiary);
+        String comment = record.get(BankStatementEnum.comment);
+        Double amount = SafeStringParser.parseDouble(record.get(BankStatementEnum.amount));
+        String currency = record.get(BankStatementEnum.currency);
+
+        return BankStatement.builder()
+                .accountNumber(accountNumber)
+                .operationDate(operationDate)
+                .beneficiary(beneficiary)
+                .comment(comment)
+                .amount(amount)
+                .currency(currency)
+                .build();
+    }
+
 }

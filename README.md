@@ -11,7 +11,7 @@
 | 440924706     | 2020-10-28T03:24:24 | Mora        | Phased global product   | 88     | UAH      |
 | 519329317     | 2020-03-28T18:15:24  | Leoline     | Reduced modular synergy | 33.2   | EUR      |
 
-Valid example .csv file could be downloaded from https://easyupload.io/nkvt59
+Valid example .csv file could be downloaded from https://easyupload.io/rols9t
 
 ## Data types
 - accountNumber [mandatory] - string

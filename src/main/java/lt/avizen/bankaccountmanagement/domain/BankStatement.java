@@ -30,7 +30,6 @@ public class BankStatement {
 
     @Column
     @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime operationDate;
 
     @Column

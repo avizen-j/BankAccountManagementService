@@ -16,3 +16,8 @@ spring:
         order_inserts: true
         jdbc:
           batch_size: 30
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB

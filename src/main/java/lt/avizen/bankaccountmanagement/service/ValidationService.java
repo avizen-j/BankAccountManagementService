@@ -1,10 +1,9 @@
 package lt.avizen.bankaccountmanagement.service;
 
-import lt.avizen.bankaccountmanagement.domain.BankStatement;
-import lt.avizen.bankaccountmanagement.model.DataValidationResponse;
+import lt.avizen.bankaccountmanagement.model.ValidationResult;
 
 import java.util.List;
 
 public interface ValidationService {
-    <T> DataValidationResponse<T> validateList(List<T> listItems);
+    <T> ValidationResult<T> validateList(List<T> listItems);
 }

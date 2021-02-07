@@ -3,11 +3,16 @@ package lt.avizen.bankaccountmanagement;
 import lt.avizen.bankaccountmanagement.domain.BankStatement;
 import lt.avizen.bankaccountmanagement.enums.BankStatementEnum;
 import lt.avizen.bankaccountmanagement.service.CsvService;
+import lt.avizen.bankaccountmanagement.service.CsvServiceImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -22,17 +27,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class CsvServiceTests {
 
     private Path csvFilesDirectory;
 
-    @Autowired
     private CsvService csvService;
 
     @Before
     public void setup() {
         csvFilesDirectory = Path.of("src", "test", "resources");
+        csvService = new CsvServiceImpl();
     }
 
     @Test

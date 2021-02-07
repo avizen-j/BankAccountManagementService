@@ -42,7 +42,9 @@ public class ManagementController {
                     .contentType(MediaType.parseMediaType("text/csv"))
                     .body(csvByteArr);
         } catch (DateTimeParseException | NoSuchElementException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.badRequest().body(ErrorResponse.builder()
+                    .message(ex.getMessage())
+                    .build());
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
             return ResponseEntity.status(500).body(new ErrorResponse("Something went wrong.", ex.getMessage()));
@@ -60,7 +62,9 @@ public class ManagementController {
             return ResponseEntity.ok()
                     .body(new AccountBalanceResponse(accountNumber, accountBalance));
         } catch (DateTimeParseException | NoSuchElementException ex) {
-            return ResponseEntity.badRequest().body(ex.getMessage());
+            return ResponseEntity.badRequest().body(ErrorResponse.builder()
+                    .message(ex.getMessage())
+                    .build());
         } catch (Exception ex) {
             LOGGER.error(ex.getMessage(), ex);
             return ResponseEntity.status(500).body(new ErrorResponse("Something went wrong.", ex.getMessage()));

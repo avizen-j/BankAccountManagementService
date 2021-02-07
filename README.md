@@ -2,7 +2,7 @@
 
 ## How to build and run?
 1. Navigate to application root directory (docker-compose.yml will be there)
-2. Run `./mvnw clean package -DskipTests`
+2. Run `mvn clean install`
 3. Run `docker-compose up -d`
 
 ## Example file structure
